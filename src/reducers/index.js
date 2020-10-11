@@ -17,7 +17,9 @@ const initialGameState = {
   lives: 3,
   flyingObjects: [],
   lastObjectCreatedAt: new Date(),
-  cannonBalls: []
+  cannonBalls: [],
+  currentPlayer: null,
+  players: null
 };
 
 const initialState = {
@@ -33,6 +35,16 @@ function reducer(state = initialState, action) {
       return startGame(state, initialGameState);
     case SHOOT:
       return shoot(state, action);
+    case LEADERBOARD_LOADED:
+      return {
+        ...state,
+        players: action.players
+      };
+    case LOGGED_IN:
+      return {
+        ...state,
+        currentPlayer: action.player
+      };
     default:
       return state;
   }
